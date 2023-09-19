@@ -4,6 +4,6 @@ This repo contains scripts and projects involving an analytics initiative for Mc
 Here are some examples of visuals we have:
 
 Location Marking for Occurences
-![alt text](https://github.com/taysir-alam/macmbb2324/blob/main/courtvis.png?raw=true)
+![alt text](https://github.com/taysir-alam/macmbb2324/main/courtvis.png?raw=true)
 
 
