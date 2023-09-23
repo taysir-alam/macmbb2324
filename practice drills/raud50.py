@@ -2,20 +2,18 @@ import matplotlib.pyplot as plt
 
 # Fill in names and shooting_num
 player_names = [
-    "ARES", "CASH", "DG", "JEREM", "KAZ", "MIKE",
-    "MOODY", "PARKER", "RIAZ", "SEB", "TYRELLE", "ELI", "THOMAS"
+    "ARES","AY","CASH","DG","JEREM","KAZ","MIKE","MOODY","NATHAN","PARKER","RIAZ","SEB","ELI","THOMAS"
 ]
 
 shooting_num = [
-    58, 71, 43, 55, 71, 66, 69,
-    55, 21, 51, 71, 63, 56
+    32,28,34,24,33,30,33,27,25,30,28,25,28,28
 ]
 
 colors = []
 for percentage in shooting_num:
-    if percentage >= 70:
+    if percentage >= 34:
         colors.append('green')
-    elif percentage >= 40:
+    elif percentage >= 26:
         colors.append('yellow')
     else:
         colors.append('red')
@@ -23,11 +21,11 @@ for percentage in shooting_num:
 plt.figure(figsize=(10, 6))
 bars = plt.bar(player_names, shooting_num, color=colors)
 
-plt.title('25 IN 2: Efficiencies')
+plt.title('MARAUDER 50')
 plt.xlabel('Player')
-plt.ylabel('Shooting Efficiency')
+plt.ylabel('TOTALS')
 plt.xticks(rotation=45, ha="right")
-plt.ylim(0, 100)
+plt.ylim(0, 50)
 
 for bar, percentage in zip(bars, shooting_num):
     plt.text(

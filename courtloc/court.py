@@ -5,26 +5,46 @@ court_img = mpimg.imread('courtloc/court.jpg')
 fig, ax = plt.subplots()
 ax.imshow(court_img)
 
-shot_x = [112.5, 187.3, 398.2, 240.6, 127.9, 312.4, 193.7, 288.2, 365.9, 146.7, 327.5, 219.1, 362.0]
-shot_y = [214.8, 242.7, 177.1, 300.3, 265.5, 145.2, 318.9, 246.8, 185.7, 237.4, 201.9, 320.7, 180.5]
+shot_x = [
+    60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+    70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+    80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+    90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+    100, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+    70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+    80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+    90, 91, 92, 93, 94, 95, 96,75,80, 85,150,164,57,219,78,177
+]
 
-shot_missed_x = [210.0, 260.7, 330.5, 380.1, 220.8, 140.2, 335.6, 200.4, 298.9]
-shot_missed_y = [225.3, 255.4, 375.9, 198.7, 310.2, 275.1, 155.6, 325.7, 235.8]
+shot_y = [
+    192, 173, 206, 213, 167, 179, 203, 158, 203, 202,
+    219, 173, 199, 209, 192, 208, 158, 175, 162, 152,
+    216, 174, 186, 196, 222, 165, 222, 158, 188, 163,
+    196, 222, 217, 152, 181, 188, 154, 191, 154, 204,
+    157, 171, 214, 163, 160, 209, 185, 208, 205, 210,
+    153, 153, 160, 212, 170, 220, 209, 182, 155, 161,
+    173, 161, 186, 178, 194, 172, 176, 152, 169, 196,
+    180, 163, 180, 170, 178, 203, 177,49,47,51,241,303,330,184,340,78
+]
 
-block_x = [125.6, 275.9, 315.4, 385.7, 250.2, 160.9]
-block_y = [205.7, 240.8, 385.6, 215.3, 295.1, 272.4]
 
-turnover_x = [240.5, 190.3, 310.8, 400.0, 268.7, 150.4]
-turnover_y = [280.6, 265.2, 390.0, 175.7, 305.8, 248.9]
+shot_missed_y = [346, 336, 345, 342, 332, 334,294,36,49,45,44,200,338,350,78,204,90,153,182,313,237,199]
+shot_missed_x = [85, 101, 69, 97, 76, 104,175,52,41,47,61,99,50,45,205,220,183,226,230,159,210,230]
 
-ax.scatter(shot_x, shot_y, c='red', marker='o', label='Makes')
-ax.scatter(shot_missed_x, shot_missed_y, c='blue', marker = 'o', label='Misses')
-ax.scatter(block_x, block_y, c='green', marker='o', label='Blocks')
-ax.scatter(turnover_x,turnover_y,c='pink', marker='o', label='Turnovers')
+#block_x = [125.6, 275.9, 385.7, 250.2, 160.9]
+#block_y = [205.7, 240.8, 215.3, 295.1, 272.4]
+
+turnover_x = [210,100,44]
+turnover_y = [275,175,175]
+
+ax.scatter(shot_x, shot_y, c='green', marker='.', label='Makes')
+ax.scatter(shot_missed_x, shot_missed_y, c='red', marker = 'D', label='Misses')
+#ax.scatter(block_x, block_y, c='orange', marker='o', label='Blocks')
+ax.scatter(turnover_x,turnover_y,c='blue', marker='o', label='Turnovers')
 
 ax.set_xlabel('Distance from baseline')
 ax.set_ylabel('Distance from sideline')
-ax.set_title('Basketball Game Shot Locations')
+ax.set_title('Occurrence Locations 09/22/2023')
 ax.legend()
 
 plt.show()
