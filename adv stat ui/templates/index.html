@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Basketball Stats</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: maroon;
+        }
+        table {
+            border: 1px solid white;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <h1>Advanced Basketball Stats per Game</h1>
+    <img src="{{ url_for('static', filename='test.png') }}" alt="Basketball Image" width="300">
+    
+    <form method="POST">
+        <label for="team">Select a Team:</label>
+        <select name="team" id="team">
+            <option value="">Select a team</option>
+            {% for team in teams %}
+                <option value="{{ team }}" {% if team == selected_team %}selected{% endif %}>{{ team }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Show Stats">
+    </form>
+
+    {% if selected_team %}
+    <h2>Stats for {{ selected_team }}</h2>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Percentage</th>
+        </tr>
+        {% for metric, value in metrics_and_values %}
+        <tr>
+            <td>{{ metric }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Bar Graphs for Metrics</h2>
+    <div id="barGraphs">
+        {% for metric, value in metrics_and_values %}
+            <h3>{{ metric }}</h3>
+            <canvas id="{{ metric }}Chart" width="400" height="100"></canvas>
+            <script>
+                var ctx = document.getElementById("{{ metric }}Chart").getContext("2d");
+                var value = {{ value|safe }};
+                var color;
+                if (value < 35) {
+                    color = "red";
+                } else if (value >= 35 && value < 50) {
+                    color = "yellow";
+                } else {
+                    color = "green";
+                }
+                var chart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: ["{{ metric }}"],
+                        datasets: [{
+                            label: "{{ metric }}",
+                            data: [value],
+                            backgroundColor: color,
+                            borderColor: color,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: "Percentage"
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>
