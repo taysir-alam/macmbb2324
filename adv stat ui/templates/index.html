@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Advanced Basketball Stats</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
     <style>
         body {
             background-color: black;
@@ -12,25 +13,38 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            padding: 20px; /* Added padding for spacing */
         }
         h1 {
-            color: maroon;
+            font-family: 'Anton', sans-serif;
+            color: rgba(138, 17, 82, 0.895);
+            margin-bottom: 20px; /* Added margin for spacing */
         }
         table {
             border: 1px solid white;
-            margin-top: 10px;
+            margin-top: 20px; /* Increased margin for spacing */
+            margin-bottom: 20px; /* Increased margin for spacing */
         }
         th, td {
-            padding: 5px;
+            padding: 10px; /* Increased padding for spacing */
             text-align: center;
         }
+        .red {
+            color: red;
+        }
+        .yellow {
+            color: yellow;
+        }
+        .green {
+            color: green;
+        }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 </head>
 <body>
-    <h1>Advanced Basketball Stats per Game</h1>
-    <img src="{{ url_for('static', filename='test.png') }}" alt="Basketball Image" width="300">
-    
+    <h1>MAC MBB PILLARS AND ADV STATS</h1>
+    <img src="{{ url_for('static', filename='test.png') }}" alt="Basketball Image" width="150">
+    <br>
+    <br>
     <form method="POST">
         <label for="team">Select a Team:</label>
         <select name="team" id="team">
@@ -52,55 +66,10 @@
         {% for metric, value in metrics_and_values %}
         <tr>
             <td>{{ metric }}</td>
-            <td>{{ value }}</td>
+            <td class="{% if value < 35 %}red{% elif value >= 35 and value < 50 %}yellow{% else %}green{% endif %}">{{ value }}%</td>
         </tr>
         {% endfor %}
     </table>
-
-    <h2>Bar Graphs for Metrics</h2>
-    <div id="barGraphs">
-        {% for metric, value in metrics_and_values %}
-            <h3>{{ metric }}</h3>
-            <canvas id="{{ metric }}Chart" width="400" height="100"></canvas>
-            <script>
-                var ctx = document.getElementById("{{ metric }}Chart").getContext("2d");
-                var value = {{ value|safe }};
-                var color;
-                if (value < 35) {
-                    color = "red";
-                } else if (value >= 35 && value < 50) {
-                    color = "yellow";
-                } else {
-                    color = "green";
-                }
-                var chart = new Chart(ctx, {
-                    type: "bar",
-                    data: {
-                        labels: ["{{ metric }}"],
-                        datasets: [{
-                            label: "{{ metric }}",
-                            data: [value],
-                            backgroundColor: color,
-                            borderColor: color,
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                title: {
-                                    display: true,
-                                    text: "Percentage"
-                                }
-                            }
-                        }
-                    }
-                });
-            </script>
-        {% endfor %}
-    </div>
     {% endif %}
 </body>
 </html>
