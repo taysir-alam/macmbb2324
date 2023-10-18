@@ -1,42 +1,41 @@
 import matplotlib.pyplot as plt
 
 # Fill in names and shooting_num
-player_names = [
-    "ARES", "CASH", "DG", "JEREM", "KAZ", "MIKE",
-    "MOODY", "PARKER", "RIAZ", "SEB", "TYRELLE", "ELI", "THOMAS"
-]
+player_names = ["AY", "ELIJAH", "MATT", "MOODY", "NATE", "PARKER", "SEB", "STEVO","TYLER"]
 
 shooting_num = [
-    58, 71, 43, 55, 71, 66, 69,
-    55, 21, 51, 71, 63, 56
+    75.76, 56.82, 47.22, 65.71, 45.45, 51.22, 63.16, 18.75, 62.50
 ]
 
 colors = []
 for percentage in shooting_num:
     if percentage >= 70:
-        colors.append('green')
+        colors.append('#4CAF50')  # Green
     elif percentage >= 40:
-        colors.append('yellow')
+        colors.append('#FFFF00')  # Yellow
     else:
-        colors.append('red')
+        colors.append('#F44336')  # Red
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(12, 6))
 bars = plt.bar(player_names, shooting_num, color=colors)
 
-plt.title('25 IN 2: Efficiencies')
-plt.xlabel('Player')
-plt.ylabel('Shooting Efficiency')
-plt.xticks(rotation=45, ha="right")
+plt.title('25 in 2 Eff - October 17th (2nd Set)', fontsize=16, fontweight='bold')
+plt.xlabel('Player', fontsize=12)
+plt.ylabel('Shooting Efficiency (%)', fontsize=12)
+plt.xticks(rotation=45, ha="right", fontsize=10)
 plt.ylim(0, 100)
 
 for bar, percentage in zip(bars, shooting_num):
     plt.text(
         bar.get_x() + bar.get_width() / 2,
-        bar.get_height() + 0.02,
-        f'{percentage:.2f}',  # Format the percentage to two decimal places
+        bar.get_height() + 2,
+        f'{percentage:.2f}%',  # Format the percentage to two decimal places
         ha='center',
-        va='bottom'
+        va='bottom',
+        fontsize=10
     )
 
 plt.tight_layout()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
 plt.show()
